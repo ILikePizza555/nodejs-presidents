@@ -47,8 +47,8 @@ export function splitDeck(n: number, deck: Card[]): Card[][] {
     const subdecks: Card[][] = [];
 
     for (let i = 0; i < n; i++) {
-        const lowerBound = n * subdeckLength;
-        const upperBound = Math.min((n + 1) * subdeckLength, deck.length);
+        const lowerBound = i * subdeckLength;
+        const upperBound = Math.min((i + 1) * subdeckLength, deck.length);
 
         subdecks.push(deck.slice(lowerBound, upperBound));
     }
