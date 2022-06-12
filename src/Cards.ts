@@ -1,7 +1,5 @@
 import { RandomAPI } from "boardgame.io/dist/types/src/plugins/random/random";
 
-export type Value =  1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-
 export enum Suit {
     Hearts,
     Diamonds,
@@ -9,49 +7,51 @@ export enum Suit {
     Spades,
 }
 
+export enum Value {
+    Ace,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+}
+
 export interface Card {
     readonly suit: Suit;
     readonly value: Value;
 }
 
-export class Deck {
-    static standardDeck(): Deck {
-        const deck: Card[] = [];
-
-        for (let suit = 0; suit < 4; suit++) {
-            for (let value = 1; value <= 10; value++) {
-                deck.push({
-                    suit,
-                    value: value as Value,
-                });
-            }
+export function generateStandardDeck(): Card[] {
+    const deck: Card[] = [];
+    for (let suit = 0; suit < 4; suit++) {
+        for (let value = 1; value <= 13; value++) {
+            deck.push({
+                suit,
+                value,
+            });
         }
-
-        return new Deck(deck);
     }
 
-    public cards: Card[];
+    return deck;
+}
 
-    constructor(cards: Card[]) {
-        this.cards = cards;
+export function splitDeck(n: number, deck: Card[]): Card[][] {
+    const subdeckLength = Math.floor(deck.length / n);
+    const subdecks: Card[][] = [];
+
+    for (let i = 0; i < n; i++) {
+        const lowerBound = n * subdeckLength;
+        const upperBound = Math.min((n + 1) * subdeckLength, deck.length);
+
+        subdecks.push(deck.slice(lowerBound, upperBound));
     }
 
-    public split(n: number): Deck[] {
-        const subdeckLength = Math.floor(this.cards.length / n);
-        const subdecks: Deck[] = [];
-
-        for (let i = 0; i < n; i++) {
-            const lowerBound = n * subdeckLength;
-            const upperBound = Math.min((n + 1) * subdeckLength, this.cards.length);
-
-            subdecks.push(new Deck(this.cards.slice(lowerBound, upperBound)));
-        }
-
-        return subdecks;
-    }
-
-    public shuffle(randomApi: RandomAPI): this {
-        this.cards = randomApi.Shuffle(this.cards);
-        return this;
-    }
+    return subdecks;
 }
