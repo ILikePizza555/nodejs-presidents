@@ -1,12 +1,12 @@
 import type { Game } from "boardgame.io";
-import { Deck } from "./Cards";
+import { Card, generateStandardDeck, splitDeck } from "./Cards";
 
 export interface PresidentsGameState {
-    hands: Deck[]
+    hands: Card[][]
 }
 
 export const PresidentsGame: Game<PresidentsGameState> = {
     setup: (ctx) => ({
-        hands: Deck.standardDeck().shuffle(ctx.random).split(ctx.numPlayers)
+        hands: splitDeck(ctx.numPlayers, ctx.random.Shuffle(generateStandardDeck())),
     }),
 };
