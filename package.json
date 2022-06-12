@@ -6,9 +6,13 @@
   "author": "Izzy Lancaster <avrisaac555@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "parcel": "^2.6.0"
+    "parcel": "^2.6.0",
+    "process": "^0.11.10"
   },
   "dependencies": {
     "boardgame.io": "^0.49.12"
+  },
+  "scripts": {
+    "start": "parcel src/index.html"
   }
 }
