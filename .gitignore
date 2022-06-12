@@ -1,3 +1,6 @@
 # direnv
 .direnv/
 .envrc
+
+# node js
+node_modules/

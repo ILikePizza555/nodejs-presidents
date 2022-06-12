@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-presidents",
+  "version": "0.1.0",
+  "description": "The presidents card game implemented for the web",
+  "main": "index.html",
+  "author": "Izzy Lancaster <avrisaac555@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.6.0"
+  }
+}
