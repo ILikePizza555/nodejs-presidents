@@ -4,6 +4,7 @@ import { suitToEmoji, valueToString } from './Card';
 import { PresidentsGame, PresidentsGameState } from './Game';
 
 const App = Client({
+    numPlayers: 4,
     game: PresidentsGame,
 })
 
@@ -24,9 +25,13 @@ function update({G, ctx}: State<PresidentsGameState>) {
         hand.removeChild(hand.firstChild);
     }
 
-    currentHand.forEach(c => {
-        const child = document.createElement("div");
+    currentHand.forEach((c, i) => {
+        const child = document.createElement("button");
         child.innerText = `${valueToString(c.value)} ${suitToEmoji(c.suit)}`;
+        child.onclick = _ => {
+            App.moves.playCard(i)
+        };
+
         hand.appendChild(child);
     })
 }
