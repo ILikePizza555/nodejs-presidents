@@ -23,6 +23,7 @@ export const PresidentsGame: Game<PresidentsGameState> = {
             // G.trick is null or less than the card value
             const [playedCard] = getCurrentPlayerHand(G, ctx).splice(id, 1);
             G.trick = playedCard.value;
+            ctx.events.endTurn();
         }
     }
 };
