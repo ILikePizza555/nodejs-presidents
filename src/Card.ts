@@ -28,10 +28,38 @@ export interface Card {
     readonly value: Value;
 }
 
+export function suitToEmoji(suit: Suit): string {
+    switch(suit) {
+        case Suit.Clubs:
+            return "♣️";
+        case Suit.Diamonds:
+            return "♦️";
+        case Suit.Hearts:
+            return "♥️";
+        case Suit.Spades:
+            return "♠️";
+    }
+}
+
+export function valueToString(value: Value): string {
+    switch(value) {
+        case Value.Ace:
+            return "A";
+        case Value.Jack:
+            return "J";
+        case Value.Queen:
+            return "Q";
+        case Value.King:
+            return "K";
+        default:
+            return value.toString();
+    }
+}
+
 export function generateStandardDeck(): Card[] {
     const deck: Card[] = [];
     for (let suit = 0; suit < 4; suit++) {
-        for (let value = 1; value <= 13; value++) {
+        for (let value = 1; value < 13; value++) {
             deck.push({
                 suit,
                 value,
